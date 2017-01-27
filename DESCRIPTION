@@ -1,0 +1,11 @@
+Package: condoR
+Type: Package
+Title: Helper function for reading really wide tables
+Version: 0.1.0
+Author: Nicholas Knoblauch
+Maintainer: Nicholas Knoblauch <nwknoblauch@gmail.com>
+Description: This package wraps the function read_big_data, which allows for very wide dataframes to be read in chunks. 
+License: GPL(3.0)
+Encoding: UTF-8
+LazyData: true
+Imports:dplyr,readr,tidyr

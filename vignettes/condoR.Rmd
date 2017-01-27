@@ -1,0 +1,42 @@
+---
+title: "pajRo"
+author: "Nicholas Knoblauch"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## How to use pajRo 
+
+Let's say we have a really big csvfile, and it has a LOT of columns.  Too many columns!
+
+```{r}
+really_big_csvfile <- "../data-raw/lilteenyData.csv"
+```
+
+In this example file, we have bird sample data.  Each row has a `SAMPLING_EVENT_ID`. For every `SAMPLING_EVENT_ID` we have a bunch of metadata, and then we have a **column for like every kind of bird found anywhere in the dataset**. A `0` indicates that that bird was **not** found, and otherwise the number of birds found is indicated with something other than a `0` (it's usually a number, but sometimes it's an X).  What we'd rather have is a row for every non-zero bird sighting.
+
+```{r}
+library(pajRo)
+
+regular_sized_data <- read_big_data(really_big_csvfile)
+head(regular_sized_data)
+```
+
+So this is still a lot of columns.  Let's use `dplyr` (included in this package), and get some more info on which birds are found in which months
+
+```{r}
+library(dplyr)
+month_data <- select(regular_sized_data,MONTH,Bird)
+head(month_data)
+```
+
+Do we find more kinds of birds in certain months?
+
+```{r}
+group_by(month_data,MONTH) %>% summarise(n_birds=n_distinct(Bird))
+```
+Not really.
