@@ -1,5 +1,5 @@
 ---
-title: "pajRo"
+title: "condoR"
 author: "Nicholas Knoblauch"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
