@@ -21,6 +21,9 @@ read_big_data <- function(csvfile,key_colname="Bird",value_colname="Found",chunk
   library(tidyr)
   library(readr)
   library(dplyr)
+  if(!file.exists(csvfile)){
+    stop(paste0("I couldn't find the file ",csvfile,"so I have to quit"))
+    }
   #First we read the first line
   ncsv_callback <- function(x,pos){
   return(csv_callback(x,pos,key_colname=key_colname,value_colname=value_colname))
